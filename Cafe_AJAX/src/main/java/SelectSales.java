@@ -41,7 +41,7 @@ public class SelectSales extends HttpServlet {
 		String url="jdbc:oracle:thin:@localhost:1521:orcl";
 		String userid="orauser";
 		String passcode="human123";
-		String sql="select b.mobile,a.name,b.qty,b.total,b.sold_time"
+		String sql="select nvl(b.mobile,'-') as mobile,a.name,b.qty,b.total,b.sold_time"
 				+ " from menu a, cafe_sales b"
 				+ " where a.code=b.menu_code"
 				+ " order by b.sold_time";

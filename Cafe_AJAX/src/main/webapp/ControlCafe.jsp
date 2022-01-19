@@ -13,18 +13,21 @@
 
 <style>
 .toptbl {
-	border: 1px solid rgb(25, 40, 35);
-    border-radius: 10px 10px;
+	border-bottom: 1px solid rgb(25, 40, 35);
+	border-top: 1px solid rgb(25, 40, 35);
+/*     border-radius: 10px 10px; */
     width:90%;
     height: auto;
 	padding: 5px 10px;
 	margin: auto;
 }
 .sectbl{
-	margin: 30px 0px 0px 30px;
+	width: 80%;
+ 	margin: 30px 30px;
 	padding: 10px 20px;
-	border-right: 1px solid #444444;
+/* 	border-right: 1px solid #444444; */
 	height:500px;
+	/* display:inline-block;zoom:1;display:inline; */
 }
 .thrtbl{
 	margin: 00px 30px 0px 0px;
@@ -39,16 +42,22 @@ table {
 	margin: auto;
     background-color: rgb(208, 198, 177);
 }
-caption,#dlgth th,p {
+#dlgth th,p {
 	font-size: 140%;
 	font-weight: bold;
-    border-radius: 40px 80px / 80px 40px;
+    border-radius:  10px 10px;
     border: 2px solid rgb(25, 40, 35);
     width: 200px;
 	background-color: rgb(33, 133, 89);
     text-align: center;
     vertical-align:middle;
     margin: 0 auto;
+}
+caption {
+	height:50px;
+	text-align: center;
+    vertical-align:middle;
+    margin: auto;
 }
 th {
 	border: 1px solid rgb(25, 40, 35);
@@ -58,13 +67,13 @@ th {
 }
 #selth th {
 	padding: 3px 8px;
-    border-radius: 20px 10px / 10px 20px;
+    border-radius: 10px 10px;
     background-color: rgb(235, 176, 53);
 }
 #tblth th {
-    border-radius: 20px 10px / 10px 20px;
+    border-radius: 10px 10px;
     background-color: rgb(235, 176, 53);
-	padding: 3px 15px;
+	padding: 3px 8px;
 }
 #selSales th {
 	padding: 5px 0px;
@@ -90,6 +99,7 @@ input {
     border-radius: 8px 8px / 8px 8px;
     background-color: #f5f5f5;
     text-align: right;
+    padding: 0px 3px;
 }
 select,#menutbl,#sel {
     border-radius: 5px 5px / 5px 5px;
@@ -99,29 +109,53 @@ select,#menutbl,#sel {
     margin: 0 auto;
     width: 300px;
 }
+#menutbl td{
+	text-align: center;
+}
 div {
 	background-repeat : no-repeat;
     background-image: url("https://mblogthumb-phinf.pstatic.net/20150920_165/namimo0303_1442719834179hIqUy_PNG/%C4%BF%C7%C7%C0%DC.png?type=w2");
 }
 #btnMenu,#btnSum {
-    border-radius: 40px 80px / 80px 40px;
-    background-color: rgb(235, 176, 53);
+    border-radius: 10px 10px;
+    background-color: yellowgreen;
 	font-weight: bold;
-    padding: 0px 10px;
+    padding: 5px 10px;
+    width: 100px;
 }
-#btnReset,#btnCancel,#btnClose {
-    border-radius: 40px 80px / 80px 40px;
+#btnReset,#btnCancel {
+    border-radius:  10px 10px;
+    background-color: lightgray;
+	font-weight: bold;
+/*     font-family: 'Gowun Dodum', sans-serif; */
+    padding: 3px 0px;
+    width: 100px;
+}
+#btnAdd,#btnDone {
+    border-radius:  10px 10px;
+    background-color: silver;
+	font-weight: bold;
+/*     font-family: 'Gowun Dodum', sans-serif; */
+    padding: 3px 0px;
+    width: 100px;
+}
+#btnClose{
+	border-radius:  10px 10px;
     background-color: rgb(221, 30, 47);
 	font-weight: bold;
+	text-align:center;
     font-family: 'Gowun Dodum', sans-serif;
-    padding: 0px 10px;
+    padding: 3px 0px;
+    width: 50px;
 }
-#btnAdd,#btnDone,#btnPlus {
-    border-radius: 40px 80px / 80px 40px;
+#btnPlus {
+    border-radius:  10px 10px;
     background-color: rgb(6, 162, 203);
 	font-weight: bold;
+	text-align:center;
     font-family: 'Gowun Dodum', sans-serif;
-    padding: 0px 10px;
+    padding: 3px 0px;
+    width: 50px;
 }
 * {
     font-size: large;
@@ -135,6 +169,9 @@ h1 {
 	text-align:center;
 	font-size: 200%;
 }
+/* #menuname,#count,#menuprice {
+	float:right;
+} */
 </style>
 
 <body>
@@ -144,14 +181,12 @@ h1 {
 <img src="https://t.pimg.jp/047/101/866/1/47101866.jpg"
 	 width="100" height="105" style="float:right;">
 </td></tr></table>
+<hr>
 <table class=toptbl><tr><td>
-<table style="float:left;" class=sectbl><tr><td valign=middle>
+<table style="float:center;" class=sectbl><tr><td valign=top>
 
-	<table valign=middle>
-		<caption>메뉴목록</caption>
-		<tr><td colspan=2 align=right>
-				<button id=btnMenu>메뉴관리</button>
-			</td></tr>
+	<table style="float:left;">
+		<caption><p>메뉴목록</p></caption>
 		<tr><td align=center colspan=2>
 				<table id=menutbl size=9 width="280">
 					<thead><tr><th>메뉴이름</th><th>가격</th></tr></thead>
@@ -165,18 +200,18 @@ h1 {
 		<tr><td align=left>수량</td>
 			<td><input type=number id=count min=1></td></tr>
 		<tr><td align=left>금액</td>
-			<td><input type=number id=menuprice readonly></td></tr>
+			<td><input type=number id=menuprice readonly ></td></tr>
 		<tr><td align=right><button id=btnReset>비우기</button></td>
 			<td align=right><button id=btnAdd>메뉴추가</button></td></tr>
 	</table>
 
-</td><td valign=middle>
+</td><td valign=top>
 
-	<table>
-		<caption>주문목록</caption>
+	<table style="float:center;">
+		<caption><p>주문목록</p></caption>
 		<tr><td colspan=2></td></tr>
 		<tr><td align=center colspan=2>
-				<select id=selOrder size=10></select></td></tr>
+				<select id=selOrder size=12></select></td></tr>
 		<tr><td align=left>총액</td>
 			<td><input type=number id=total></td></tr>
 		<tr><td align=left>모바일</td>
@@ -186,16 +221,12 @@ h1 {
 			<td align=right><button id=btnDone>주문완료</button></td></tr>
 	</table>
 
-</td></tr></table>
-<table style="float:right;" class=thrtbl><tr><td valign=middle>
+</td><td valign=top>
 
-	<table>
-		<caption>판매내역</caption>
-		<tr><td colspan=2 align=right>
-				<button id=btnSum>Summary</button>
-			</td></tr>
+	<table style="float:center;">
+		<caption><p>판매내역</p></caption>
 		<tr><td align=center>
-		  <table valign=top id=sel><tr><td>
+		  <table id=sel><tr><td valign=top>
 			<table id=selSales>
 					<thead><tr><th>고객번호</th><th>메뉴이름</th><th>수량</th><th>가격</th></tr></thead>
 					<tbody></tbody>
@@ -204,15 +235,26 @@ h1 {
 		</td></tr>
 	</table>
 
+</td><td>
+
+	<table style="float:center;">
+		<tr><td colspan=2 align=right>
+				<button id=btnMenu>메뉴관리</button>
+			</td></tr>
+		<tr><td colspan=2 align=right>
+				<button id=btnSum>Summary</button>
+			</td></tr>
+	</table>
+
 </td></tr></table>
 </td></tr></table>
+<hr>
 
 	<div id=dlgSum style='display:none;' title='Summary'>
 		<table>
 		<thead id=dlgth><tr><th>메뉴별 매출금액</th><th>고객별 매출금액</th></tr></thead>
 		<tbody><tr>
-		<td>
-		<table id=selSumMenu>
+		<td valign=top><table id=selSumMenu>
 		<thead id=selth><tr><th>메뉴명</th><th>수량</th><th>금액</th></tr></thead>
 		<tbody></tbody>
 		</table></td>
@@ -226,16 +268,16 @@ h1 {
 
 	<div id=dlgMenu style='display:none;' title='메뉴관리'>
 		<table><tr>
-			<td>
+			<td valign=top>
 				<table id=tblMenu>
-					<caption>현재메뉴</caption>
+					<caption><p>현재메뉴</p></caption>
 					<thead id=tblth><tr><th>번호</th><th>메뉴이름</th><th>가격</th></tr></thead>
 					<tbody></tbody>
 				</table>
 			</td>
-			<td>
-				<table valign=top>
-				<tr><td colspan=2><p>수정하기</p></td></tr>
+			<td valign=top>
+				<table>
+				<caption><p>수정하기</p></caption>
 				<tr><td colspan=2>&nbsp;</td></tr>
 				<tr><td>번호</td><td><input type=number id=code style='width: 150px'></td></tr>
 				<tr><td>메뉴명</td><td><input type=text id=name style='width: 150px'></td></tr>

@@ -19,12 +19,14 @@ function loadMenu(){
 $(document)
 .ready(function(){
 	$('#selMenu').empty();
+	$('#selMenu').append('<option selected>메뉴선택</option>');
 	$.get('SelectMenu',{},function(txt){
  		
  		if(txt=='') return false;
 		
  		let rec=txt.split(';');
 		for(i=0;i<rec.length;i++){
+			/*$('#selMenu').append('<option selected>메뉴선택</option>');*/
 			let field=rec[i].split(',');
 			let html='<option>'+field[1]+'  '+field[2]+'</option>';
 			$('#selMenu').append(html);
@@ -178,20 +180,31 @@ $(document)
             },
             close:function(){
             	$('#selMenu').empty();
+				$('#selMenu').append('<option selected>메뉴선택</option>');
             	$.get('SelectMenu',{},function(txt){
-             		
              		if(txt=='') return false;
-            		
              		let rec=txt.split(';');
             		for(i=0;i<rec.length;i++){
+						/*$('#selMenu').append('<option selected>메뉴선택</option>');*/
             			let field=rec[i].split(',');
             			let html='<option>'+field[1]+'  '+field[2]+'</option>';
             			$('#selMenu').append(html);
             		}
             	},'text');
+				
+				$('#menutbl tbody').empty();
+				$.get('SelectMenu',{},function(txt){
+ 					if(txt=='') return false;
+ 					let rec=txt.split(';');
+					for(i=0;i<rec.length;i++){
+						let field=rec[i].split(',');
+						let html='<tr><td>'+field[1]+'</td><td>'+field[2]+'</td></tr>';
+						$('#menutbl tbody').append(html);
+					}
+				},'text');
             }
         });
-    })
+})
 .on('click','#btnPlus',function(){
 	let operation='';
 	

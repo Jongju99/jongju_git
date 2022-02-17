@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.human.team.iTeam">
+<!-- 객실관리 -->
+<select id="getroomType" resultType="com.human.team.Roomtype">
+	select typecode,name from roomtype order by typecode
+</select>
+<select id="getroomList" resultType="com.human.team.RoomList">
+	select a.code,a.name as R_name,b.name as T_name,a.howmany,a.howmuch
+	  from room a, roomtype b
+	 where a.type=b.typecode(+) order by a.code
+</select>
+<insert id="typeAdd">
+	insert into roomtype(typecode,name) values(seq_typecode.nextval,#{param1})
+</insert>
+<insert id="RoomAdd">
+	insert into room (code,name,type,howmany,howmuch) values(seq_roomcode.nextval,#{param1},#{param2},#{param3},#{param4})
+</insert>
+<delete id="typeDelete">
+	delete from roomtype where typecode=#{param1}
+</delete>
+<delete id="roomDelete">
+	delete from room where code=#{param1}
+</delete>
+<update id="Roomupdate">
+	update room set name=#{param2}, type=#{param3}, howmany=#{param4}, howmuch=#{param5} where code=#{param1}
+</update>
+<update id="typeupdate">
+	update roomtype set name=#{param2} where typecode=#{param1}
+</update>
+
+
+<insert id="signCheck">
+	insert into member(name,gender,userid,passcode,mobile,type) values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+</insert>
+<delete id="quitMember">
+	delete from member where userid=#{param1}
+</delete>
+<select id="getMemberList" resultType="com.human.team.Member">
+   select userid,passcode,mobile,name from member
+</select>
+<update id="UpdateMember">
+   update member set login_time=to_char(sysdate,'YY/MM/DD') where userid=#{param1}
+</update>
+<select id="getTypeList" resultType="com.human.team.Member">
+   select userid,type from member
+</select>
+<update id="logoutMember">
+   update member set logout_time=to_char(sysdate,'YY/MM/DD') where userid=#{param1}
+</update>
+
+
+<insert id="insertBook">
+   insert into book values (seq_book.nextval,#{param1},to_date(#{param2},'YYYY/MM/DD'),to_date(#{param3},'YYYY/MM/DD'),#{param4},#{param5},#{param6},#{param7},#{param8})
+</insert>
+<delete id="deleteBook">
+   delete from book where book_id=#{param1}
+</delete>
+<update id="updateBook">
+   update book set roomcode=#{param2},start_dt=#{param3},end_dt=#{param4},howmany=#{param5},guest=#{param6},mobile=#{param7},howmuch=#{param8},member_id=#{param9} where book_id=#{param1}
+</update>
+<select id="getBookList" resultType="com.human.team.Book">
+   select a.book_id,a.roomcode,a.start_dt,a.end_dt,a.howmany,a.guest,a.mobile,a.howmuch,a.member_id,b.name,b.type,b.code
+   from book a,room b
+   where a.roomcode=b.code 
+</select>
+<select id="getRoomcode" resultType="com.human.team.Rcode">
+      select code from room
+</select>
+<select id="getReserve" resultType="com.human.team.Reserve">
+<![CDATA[
+    select a.code, a.name, b.name as tname, a.howmany, a.howmuch
+    from room a,roomtype b
+    where a.type=b.typecode and howmany >=#{param1} and type=#{param2} and not code in(select a.roomcode
+    from book a,room b 
+    where a.roomcode=b.code and start_dt between #{param3} and #{param4}
+     and end_dt between #{param3} and #{param4} and b.type=#{param2})
+   ]]>
+      </select>
+
+
+
+
+
+<select id="getRoomtype" resultType="com.human.team.Roomtype">
+   select typecode,name from roomtype
+</select>
+
+
+
+<!-- 게시판 -->
+<select id="getView" resultType="com.human.team.Notice">
+select id,bno,name,title,content,created,viewcnt 
+    from (select rownum id,bno ,name,title,content, created, viewcnt from board)
+where bno=#{param1}
+</select>
+<update id="plusViewCnt">
+update board set viewcnt=viewcnt+1 where bno=#{param1}
+</update>
+<insert id="writeNotice">
+   insert into board(id,bno,title,name,content,created,viewcnt)
+   values(seq_board.nextval,seq_bno.nextval,#{param1},#{param2},#{param3},sysdate,0)
+</insert>
+<delete id="deleteNotice">
+   delete from board where id=#{param1}
+</delete>
+<update id="updateNotice">
+   update board set title=#{param2},name=#{param3},content=#{param4} 
+   where id=#{param1}
+</update>
+<select id="getPaging" resultType="com.human.team.Notice">
+ select id,bno,name,title,content,created,viewcnt 
+    from (select rownum id,bno,name,title,content, created, viewcnt from board)
+where id between 1 and 10 order by id
+</select>
+<select id="PagingList" resultType="com.human.team.Notice">
+ select id,bno,name,title,content,created,viewCnt 
+    from (select rownum id,bno,name,title,content, created, viewCnt from board)
+where id between #{param1} and #{param2} order by id
+</select>
+
+<!-- 예약조회 -->
+<select id="trackbklist" resultType="com.human.team.Book">
+   select * from book where member_id=#{param1}
+</select>
+</mapper>

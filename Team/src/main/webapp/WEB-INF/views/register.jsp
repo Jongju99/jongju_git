@@ -28,8 +28,6 @@
 table {
 	border-collapse:collapse;
 	border:solid 1px white;
-	width: 90%;
-	height: 300px;
 }
 td {
 	border:2px solid white;

@@ -66,14 +66,14 @@ table { /*bound라는 class는 table 안에서만 쓸 수 있다.*/
 }
 
 #date1,#date2,#date3,#date4 {
-   width:130px;
+   width:140px;
 }
 #selRoom {
    width:380px;
    height:320px;
 }
 #selSales {
-   width:80%;
+   width:90%;
    height:320px;
 }
 .contact-section {
@@ -307,7 +307,6 @@ $(document)
        success:function(data){
           $('#date3,#date4,#nameroom,#howmany,#guest,#mobile1,#price1').val('');
            loadRoom1();
-           $("#roomtype2").find("option:eq(0)").prop('selected','true');   
            alert("예약이 변경되었습니다.");
        }
     });
@@ -332,7 +331,11 @@ $(document)
              loadRoom1();
              alert("예약이 취소되었습니다.");
              $('#date3,#date4,#nameroom,#howmany,#guest,#mobile1,#price1').val('');
-            	       $("#roomtype2").find("option:eq(0)").prop('selected','true');            
+             $("#roomtype2").find("option:eq(0)").prop('selected','true');
+
+
+             
+        
           }
        });
        return false;
@@ -415,23 +418,26 @@ $(document)
  .on('click','#selRoom option',function(){
     $('#howmany0').val($(this).val());
     console.log($('#howmany0').val());
-    let d11=$('#date3').val();
-    let d1=d11.split('/');
+    let d11=$('#date1').val();
+    console.log(d11);
+    let d1=d11.split('-');
     
-    let d22=$('#date4').val();
-    let d2=d22.split('/');
+    let d22=$('#date2').val();
+    let d2=d22.split('-');
 //     var now=newDate();
     var stDate=new Date(d1[0],d1[1],d1[2]);
     var endDate=new Date(d2[0],d2[1],d2[2]);
     var btMs = endDate.getTime() - stDate.getTime();
     var btDay = btMs / (1000*60*60*24);
-    console.log(btDay);
+    console.log(endDate);
+    btDay1=parseInt(btDay);
  let str=$(this).text();
  $('#selNum').val('');
  console.log(str);
  let str1=str.split(' ');
+ prc=parseInt(str1[3]);
  $('#nameroom').val(str1[0]);
- $('#price1').val(str1[3]*btDay);
+ $('#price1').val(parseInt(prc*btDay1)); // NaN뜸
  $('#howmany').val(str1[2]);
  let date111= $('#date1').val();
  let date11=date111.split('-');

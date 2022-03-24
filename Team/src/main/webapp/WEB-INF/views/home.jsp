@@ -10,7 +10,6 @@
 <meta name="author" content="" />
         
 <title>Human Hotel</title>
-
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
 

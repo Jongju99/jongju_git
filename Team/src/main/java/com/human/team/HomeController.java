@@ -34,32 +34,10 @@ public class HomeController {
 	private SqlSession sqlSession;
 	private ServletRequest session;
 	
-	@RequestMapping("/index")
-	public String Index(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession(true);
-		String type1="";
-		String userid="";
-		
-		if(session.getAttribute("userid")==null) {
-			userid="null";
-		} else {
-			userid=(String) session.getAttribute("userid");
-		}
-		if(session.getAttribute("type")==null){
-			type1="2";
-		} else {
-			type1=(String) session.getAttribute("type");
-		}
-		int type=Integer.parseInt(type1);
-		model.addAttribute("type",type);
-		model.addAttribute("userid",userid);
-		
-		/* return "home"; */
-		return "index";
-	}
 	
 	@RequestMapping("/map")
 	public String Map(Model model, HttpServletRequest request) {
+		
 		HttpSession session = request.getSession(true);
 		String type1="";
 		String userid="";
@@ -69,14 +47,17 @@ public class HomeController {
 		} else {
 			userid=(String) session.getAttribute("userid");
 		}
-		if(session.getAttribute("type")==null){
+		
+		if(session.getAttribute("type")==null) {
 			type1="2";
 		} else {
 			type1=(String) session.getAttribute("type");
 		}
 		int type=Integer.parseInt(type1);
+		
 		model.addAttribute("type",type);
 		model.addAttribute("userid",userid);
+		
 		return "Map";
 	}
 	@RequestMapping("/FAQ")
@@ -508,7 +489,6 @@ public class HomeController {
            userid=(String) session.getAttribute("userid");
         }
         m.addAttribute("userid",userid);
-        
         m.addAttribute("alType",alType);
       
        return "admincheck";

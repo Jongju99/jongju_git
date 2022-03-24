@@ -708,12 +708,6 @@ $.ajax({url:'/team/typelist',
 };
 
 
-
-
-
-
-
-
 </script>
 
 </html>

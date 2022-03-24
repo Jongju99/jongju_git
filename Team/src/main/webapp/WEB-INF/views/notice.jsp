@@ -214,10 +214,9 @@ function loadBoard(){
 							data[i]["name"]+"</td><td>"+data[i]["created"]+"</td><td>"+data[i]["viewCnt"]+
 							"</td><td><a href='/team/view?id="+data[i]['bno']+"'><input type=button id=view name=view value='read'></a></td></tr>";
 					$('#tbody').append(str);
-				}  
-		
+				}
 		    }
 	});
-	}
+}
 </script>
 </html>

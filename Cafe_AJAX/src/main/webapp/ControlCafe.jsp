@@ -189,7 +189,7 @@ h1 {
 	<table style="float:left;" class=tbl1>
 		<caption><p>메뉴목록</p></caption>
 		<tr><td align=center colspan=2>
-				<table id=menutbl size=9 width="280">
+				<table id=menutbl>
 					<thead><tr><th>메뉴이름</th><th>가격</th></tr></thead>
 					<tbody></tbody>
 				</table>

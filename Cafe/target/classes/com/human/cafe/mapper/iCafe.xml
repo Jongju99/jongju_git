@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.human.cafe.iCafe">
+<select id="getMenuList" resultType="com.human.cafe.Menu">
+	select code,name,price from menu order by code
+</select>
+<insert id="insertMenu">
+	insert into menu values(seq_menu.nextval,#{param1},#{param2})
+</insert>
+<update id="updateMenu">
+	update menu set name=#{param2},price=#{param3} where code=#{param1}
+</update>
+<delete id="deleteMenu">
+	delete from menu where code=#{param1}
+</delete>
+<insert id='insertSales'>
+	insert into cafesales(code,menu_code,qty,price,sold_time,mobile) values
+	(seq_code.nextval,#{param1},#{param2},#{param3},to_char(sysdate,'YYYYMMDDHHMI'),#{param4})
+</insert>
+<select id="getSales" resultType="com.human.cafe.Cafe_sales">
+	select a.mobile,b.name,a.qty,a.price,a.sold_time
+	  from cafesales a, menu b
+	 where a.menu_code=b.code
+	 order by a.sold_time desc
+</select>
+<select id="salesMenu" resultType="com.human.cafe.sales">
+	select a.name,sum(b.price) as total from menu a, cafesales b
+	 where a.code=b.menu_code group by a.name
+	 order by a.name
+</select>
+<select id="salesMobile" resultType="com.human.cafe.sales">
+	select mobile as name,sum(price) as total from cafesales group by mobile order by mobile
+</select>
+</mapper>

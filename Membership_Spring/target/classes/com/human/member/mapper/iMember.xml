@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.human.member.iMember">
+<select id="getMember" resultType="com.human.member.Member">
+	select userid,passcode from member
+</select>
+<insert id="signCheck">
+	insert into member(name,gender,userid,passcode,mobile,interest) values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+</insert>
+<update id="loginCheck">
+	update member set login_time=to_char(sysdate,'YYYYMMDDHHMI') where userid=#{param1}
+</update>
+<update id="logout">
+	update member set logout_time=to_char(sysdate,'YYYYMMDDHHMI') where userid=#{param1}
+</update>
+</mapper>
